@@ -1,6 +1,6 @@
 /**
  * @author Sonu Gupta
- * @version 1.0
+ * @version 1.5
 */
 
 import java.io.File;
@@ -28,13 +28,15 @@ public class MurdaMaanis {
         Random rand = new Random();
         String guessWord = words.get(rand.nextInt(words.size()));
         
-        System.out.println(guessWord);
         //Creating arrayList of Char to compare and store chars of guessWord
         ArrayList<Character> Guesses = new ArrayList<>();
         
-        
-        //printGameState(guessWord, Guesses);
-        
+        /**
+         * This while loop is where I implementing most of my methods that I created!
+         * So, we are creating invalidCount variable to keep track of invalid entries user makes 
+         * and when invalid count is 6 or greater we want to stop the Game
+         * And also we are passing our invalidCount as a parameter to printMurdaMaanis method, which will make our CLI MurdaMaanis (dead person)
+         */
         int invalidCount = 0;
         while(true) {
         	printMurdaMaanis(invalidCount);
@@ -52,18 +54,24 @@ public class MurdaMaanis {
         	   System.out.println("Congratulation, you win!");
         	   break;
            }
-           //giving user chance to guess out the complete word
+           //giving user chance to guess out the complete word, when user's validCount is >= 2 
+           if (GuessEntireWordChoice(guessWord, Guesses)) { //if true
            System.out.println("Enter your guess for the word: ");
            if(input.nextLine().equals(guessWord)) {
         	   System.out.println("Congratulation, you win!");
         	   break;
            }
            else 
-        	   System.out.println("Incorrect, please keep playing!");
-           
+        	   System.out.println("Incorrect, please keep playing!");  
 	      }
+        }
        
 	}
+	/**
+	 * This method prints dead person or MurdaMaanis for each invalid choice we make till 5 invalid choices!
+	 * We are passing our invalidCount as a parameter to printMurdaMaanis method, which will make our CLI MurdaMaanis (dead person)
+	 * @param invalidCount
+	 */
 	private static void printMurdaMaanis(int invalidCount) {
 		System.out.println(" *******");
 		System.out.println(" |     |");
@@ -95,6 +103,13 @@ public class MurdaMaanis {
 		System.out.println("");
 		System.out.println("");
 	}
+	/**
+	 * Get's letter input from user and fills it into our Guesses Arraylist
+	 * @param input
+	 * @param guessWord
+	 * @param Guesses
+	 * @return
+	 */
 	private static boolean getGuess(Scanner input, String guessWord, ArrayList<Character> Guesses) {
 		System.out.println("Please enter a letter: ");
         String UserInput = input.nextLine();
@@ -121,5 +136,24 @@ public class MurdaMaanis {
         System.out.println();
         return (validGuess_count == guessWord.length());
 	}
-
+	
+	/**
+	 * Specialty of MurdaMaanis Game!
+     * This method is special inclusion this version of the game where we want to start game giving 
+     * a chance to user to make a guess which is an entire word, when they make it to two or more valid letter guesses!
+     * It returns boolean: true or false!
+     * @param guessWord: iterating through it and comparing it to Guesses
+     * @param Guesses: when Guesses equals a char of guessWord
+     */
+	private static boolean GuessEntireWordChoice(String guessWord, ArrayList<Character> Guesses) {
+		boolean state = false;
+		int validGuess_count = 0;
+		for (int i = 0; i < guessWord.length(); i++) {
+        	if (Guesses.contains(guessWord.charAt(i))) 
+        		validGuess_count++;
+        	if (validGuess_count >=2)  
+        		state = true;	
+        	}
+		return state;
+	      }
 }
