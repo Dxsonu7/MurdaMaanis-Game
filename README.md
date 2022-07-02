@@ -1,6 +1,6 @@
 # MurdaMaanis-Game
 1. MurdaMaanis is a command-line interface (CLI) game created using Java. 
-2. Implemented the display of the game's state, looser based on number of invalid entries, and winner based on appropriate number of valid entries.
+2. Implemented the display of the game's state, loser based on number of invalid entries, and winner based on appropriate number of valid entries.
 3. Used Java loops, conditionals, operators, methods, dictionaries to create the MurdaMaanis.
 
 #About Game#: Inspired by Hangman game, Murda Maanis has special inclusion from v1.5! The game gives a chance to guess entire word after every guess that user makes. This option is enabled when  user it to two or more valid letter guesses!
